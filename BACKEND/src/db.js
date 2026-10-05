@@ -1,9 +1,12 @@
 const { Pool } = require("pg");
 require("dotenv").config();
 
-const connectionString =
-  process.env.DATABASE_URL ||
-  "postgres://postgres:alone15@localhost:5432/cuidarteplus";
+// Leer únicamente desde la variable de entorno
+const connectionString = process.env.DATABASE_URL;
+
+if (!connectionString) {
+  console.warn("ADVERTENCIA: La variable de entorno DATABASE_URL no está definida.");
+}
 
 const pool = new Pool({ connectionString });
 
